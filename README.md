@@ -1,2 +1,2 @@
 # assignment1
-Assignment 1 for ios class. Calculator
+IOS programming repo for all calculator assignments
