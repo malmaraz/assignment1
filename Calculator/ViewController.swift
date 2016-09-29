@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var history: UILabel!
     var userIsTypingNumber: Bool = false
     var usedDecimal: Bool = false
-    var operandStack = Array<Double>()
+    var brain = CalculatorBrain()
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -37,64 +37,55 @@ class ViewController: UIViewController {
         print("digit = \(digit)")
     }
 
+    @IBAction func setMem(sender: UIButton) {
+        brain.variableValues["M"] = displayValue
+    }
+    
+    @IBAction func getMem(sender: UIButton) {
+        if let val = brain.variableValues["M"] {
+            display.text = "\(val)"
+        }
+    }
+    
     @IBAction func enter() {
         userIsTypingNumber = false
         usedDecimal = false
-        operandStack.append(displayValue)
-        print("operandStack = \(operandStack)")
-        
+        if let result = brain.pushOperand(displayValue!) {
+            displayValue = result
+            history.text = brain.description + " ="
+        }
     }
     
     
     @IBAction func operate(sender: UIButton) {
-        let op = sender.currentTitle!
         if userIsTypingNumber {
             enter()
         }
-        switch op {
-        case "×": performOperation( op, operation: { $0 * $1 } )
-        case "÷": performOperation( op, operation: { $0 / $1 } )
-        case "+": performOperation( op, operation: { $0 + $1 } )
-        case "-": performOperation( op, operation: { $0 - $1 } )
-        case "√": performOperation( op, operation: { sqrt($0) } )
-        case "sin": performOperation( op, operation: { sin($0) } )
-        case "cos": performOperation( op, operation: { cos($0) } )
-        default: break
+        if let operation = sender.currentTitle {
+            if let result = brain.performOperation(operation) {
+                displayValue = result
+            }
         }
     }
     
-    private func performOperation(op: String, operation: (Double, Double) -> Double) {
-        if operandStack.count >= 2 {
-            let f = operandStack.removeLast()
-            let l = operandStack.removeLast()
-            displayValue = operation(f, l)
-            history.text = "\(f) \(op) \(l)"
-            enter()
-        }
-    }
-    
-    private func performOperation(op:String, operation: Double -> Double) {
-        if operandStack.count >= 1 {
-            let f = operandStack.removeLast()
-            displayValue = operation(f)
-            history.text = "\(op)\(f)"
-            enter()
-        }
-    }
-    
-    var displayValue: Double {
+    var displayValue: Double? {
         get {
             return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
         } set {
-            display.text = "\(newValue)"
+            if (newValue != nil) {
+                display.text = "\(newValue!)"
+            } else {
+                display.text = "0"
+            }
             userIsTypingNumber = false
         }
     }
     @IBAction func clear() {
-        operandStack.removeAll()
+        brain.clearStack()
         display.text = "0"
         userIsTypingNumber = false
         usedDecimal = false
+        brain.variableValues.removeAll()
     }
 }
 
