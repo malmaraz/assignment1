@@ -160,4 +160,29 @@ class CalculatorBrain
     }
     
     func clearStack() { opStack.removeAll() }
-}
+    
+    private func describe(_ ops: [Op], order: Int = 0) -> (description: String, remainingOps: [Op]) {
+        var currOps = ops
+        
+        if !currOps.isEmpty {
+            let op = currOps.removeLast()
+            
+            switch op {
+                
+            case .operand:
+                return (op.description, currentOps)
+            case .variable:
+                return (op.description, currentOps)
+            case .constant:
+                return (op.description, currentOps)
+            case .unaryOperation:
+                let (operandDesc, remainingOps) = describe(currentOps)
+                return ( op.description+"("+operandDesc+")", remainingOps)
+            case .binaryOperation(_, let precedence, _, _):
+                let (operandDesc1, remainingOps1) = describe(currentOps, currentOpPrecedence: precedence)
+                let (operandDesc2, remainingOps2) = describe(remainingOps1, currentOpPrecedence: precedence)
+            }
+        }
+        return ("?", currOps)
+    }
+    }

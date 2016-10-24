@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var history: UILabel!
@@ -47,6 +47,12 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func appendSign(_ sender: UIButton) {
+        if userIsTypingNumber && display.value != nill {
+            appendDigit(sender)
+        }
+    }
+    
     @IBAction func enter() {
         userIsTypingNumber = false
         usedDecimal = false
@@ -55,7 +61,6 @@ class ViewController: UIViewController {
             history.text = brain.description + " ="
         }
     }
-    
     
     @IBAction func operate(sender: UIButton) {
         if userIsTypingNumber {
@@ -87,6 +92,41 @@ class ViewController: UIViewController {
         usedDecimal = false
         brain.variableValues.removeAll()
     }
+    
+    @IBAction func undo() {
+        if userIsTypingNumber {
+            if display.text!.characters.count > 1 {
+                display.text = String((display.text!).characters.dropLast())
+            } else {
+                userIsTypingNumber = false
+                display.value = 0
+            }
+        } else {
+            brain.pop()
+            display.value = 0
+            history.text = brain.description
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var dest = segue.destination
+        
+        if let navigationController = dest as? UINavigationController {
+            dest = navigationController.visibleViewController!
+        }
+        
+        if let graphViewController = dest as? GraphViewController {
+            if let segureIdentifier = segue.identifier {
+                switch segureIdentifier {
+                case "Show Graph":
+                    graphViewController.program = brain.program;
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
 }
 
 
