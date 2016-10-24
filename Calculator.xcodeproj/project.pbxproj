@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BBCD6731D9CC1BB0058B589 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBCD6721D9CC1BB0058B589 /* CalculatorBrain.swift */; };
 		AE9953501D831AD300B4EE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE99534F1D831AD300B4EE5A /* AppDelegate.swift */; };
 		AE9953521D831AD300B4EE5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9953511D831AD300B4EE5A /* ViewController.swift */; };
 		AE9953551D831AD300B4EE5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE9953531D831AD300B4EE5A /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5BBCD6721D9CC1BB0058B589 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorBrain.swift; path = Calculator/CalculatorBrain.swift; sourceTree = "<group>"; };
 		AE99534C1D831AD300B4EE5A /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE99534F1D831AD300B4EE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE9953511D831AD300B4EE5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		AE9953431D831AD300B4EE5A = {
 			isa = PBXGroup;
 			children = (
+				5BBCD6721D9CC1BB0058B589 /* CalculatorBrain.swift */,
 				AE99534E1D831AD300B4EE5A /* Calculator */,
 				AE9953631D831AD300B4EE5A /* CalculatorTests */,
 				AE99536E1D831AD300B4EE5A /* CalculatorUITests */,
@@ -188,7 +191,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Martin Almaraz";
 				TargetAttributes = {
 					AE99534B1D831AD300B4EE5A = {
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BBCD6731D9CC1BB0058B589 /* CalculatorBrain.swift in Sources */,
 				AE9953521D831AD300B4EE5A /* ViewController.swift in Sources */,
 				AE9953501D831AD300B4EE5A /* AppDelegate.swift in Sources */,
 			);
@@ -328,8 +332,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -373,8 +379,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -393,6 +401,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
